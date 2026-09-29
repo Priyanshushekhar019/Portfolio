@@ -699,6 +699,247 @@
             margin-top: 6px;
         }
 
+        /* ===== live coding platform cards ===== */
+        .coding-stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .coding-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 26px 28px;
+            backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+        }
+
+        .coding-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--grad-main);
+            opacity: 0.8;
+            transition: opacity .3s;
+        }
+
+        .coding-card.leetcode-card::before {
+            background: linear-gradient(90deg, #ffa116, #f39c12);
+        }
+
+        .coding-card.gfg-card::before {
+            background: linear-gradient(90deg, #2f8d46, #00d26a);
+        }
+
+        .coding-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .coding-card.leetcode-card:hover {
+            border-color: rgba(255, 161, 22, 0.45);
+            box-shadow: 0 14px 30px rgba(255, 161, 22, 0.12);
+        }
+
+        .coding-card.gfg-card:hover {
+            border-color: rgba(47, 141, 70, 0.45);
+            box-shadow: 0 14px 30px rgba(47, 141, 70, 0.12);
+        }
+
+        .coding-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .platform-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .platform-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .platform-icon.leetcode-icon {
+            background: rgba(255, 161, 22, 0.12);
+            color: #ffa116;
+            border: 1px solid rgba(255, 161, 22, 0.25);
+        }
+
+        .platform-icon.gfg-icon {
+            background: rgba(47, 141, 70, 0.12);
+            color: #2f8d46;
+            border: 1px solid rgba(47, 141, 70, 0.25);
+        }
+
+        .platform-info h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .platform-handle {
+            font-size: .8rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .75rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: pulse-green 1.8s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .coding-card-body {
+            margin-bottom: 22px;
+        }
+
+        .main-count {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .count-val {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--text);
+        }
+
+        .coding-card.leetcode-card .count-val {
+            background: linear-gradient(135deg, #ffa116, #ffd166);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .coding-card.gfg-card .count-val {
+            background: linear-gradient(135deg, #00d26a, #2f8d46);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .count-label {
+            font-size: .9rem;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .difficulty-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            flex: 1;
+            min-width: 65px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+        .pill-label {
+            display: block;
+            font-size: .72rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .pill-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .pill.easy .pill-val { color: #00b8a3; }
+        .pill.medium .pill-val { color: #ffc01e; }
+        .pill.hard .pill-val { color: #ff375f; }
+        .pill.school .pill-val { color: #3b82f6; }
+
+        .coding-card-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            font-size: .88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .25s ease;
+        }
+
+        .coding-card-btn:hover {
+            background: var(--grad-main);
+            border-color: transparent;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .coding-stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ===== about ===== */
         .about-grid {
             display: grid;
@@ -1574,7 +1815,7 @@
         </div>
         <div class="stats-grid">
             <div class="stat-card reveal">
-                <div class="stat-num" data-target="500" data-suffix="+">0</div>
+                <div class="stat-num" id="total-problems-count" data-target="580" data-suffix="+">0</div>
                 <div class="stat-label">Problems Solved</div>
             </div>
             <div class="stat-card reveal">
@@ -1588,6 +1829,87 @@
             <div class="stat-card reveal">
                 <div class="stat-num" data-target="8.49" data-suffix="">0</div>
                 <div class="stat-label">CGPA</div>
+            </div>
+        </div>
+
+        <!-- Live Coding Platform Counters -->
+        <div class="coding-stats-container reveal">
+            <div class="coding-card leetcode-card">
+                <div class="coding-card-header">
+                    <div class="platform-info">
+                        <div class="platform-icon leetcode-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h4>LeetCode</h4>
+                            <span class="platform-handle">@S1JTnEKhOf</span>
+                        </div>
+                    </div>
+                    <div class="live-badge"><span class="pulse-dot"></span> Live Sync</div>
+                </div>
+                <div class="coding-card-body">
+                    <div class="main-count">
+                        <span class="count-val" id="leetcode-total">419</span>
+                        <span class="count-label">Problems Solved</span>
+                    </div>
+                    <div class="difficulty-pills">
+                        <div class="pill easy">
+                            <span class="pill-label">Easy</span>
+                            <span class="pill-val" id="leetcode-easy">255</span>
+                        </div>
+                        <div class="pill medium">
+                            <span class="pill-label">Medium</span>
+                            <span class="pill-val" id="leetcode-medium">139</span>
+                        </div>
+                        <div class="pill hard">
+                            <span class="pill-label">Hard</span>
+                            <span class="pill-val" id="leetcode-hard">25</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://leetcode.com/u/S1JTnEKhOf/" target="_blank" rel="noopener noreferrer" class="coding-card-btn">
+                    <span>View LeetCode Profile</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <div class="coding-card gfg-card">
+                <div class="coding-card-header">
+                    <div class="platform-info">
+                        <div class="platform-icon gfg-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-3.116-.016 3.79 3.79 0 0 1-2.135-2.078 3.571 3.571 0 0 1-.13-.353h7.418a4.26 4.26 0 0 1-.368 1.008zm-11.99-.654a3.793 3.793 0 0 1-2.134 2.078 4.51 4.51 0 0 1-3.117.016 3.7 3.7 0 0 1-1.104-.695 2.652 2.652 0 0 1-.564-.745 4.221 4.221 0 0 1-.368-1.006H9.59c-.038.12-.08.238-.13.352zm14.501-1.758a3.849 3.849 0 0 0-.082-.475l-9.634-.008a3.932 3.932 0 0 1 1.143-2.348c.363-.35.79-.625 1.26-.809a3.97 3.97 0 0 1 4.484.957l1.521-1.49a5.7 5.7 0 0 0-1.922-1.357 6.283 6.283 0 0 0-2.544-.49 6.35 6.35 0 0 0-2.405.457 6.007 6.007 0 0 0-1.963 1.276 6.142 6.142 0 0 0-1.325 1.94 5.862 5.862 0 0 0-.466 1.864h-.063a5.857 5.857 0 0 0-.467-1.865 6.13 6.13 0 0 0-1.325-1.939A6 6 0 0 0 8.21 6.34a6.698 6.698 0 0 0-4.949.031A5.708 5.708 0 0 0 1.34 7.73l1.52 1.49a4.166 4.166 0 0 1 4.484-.958c.47.184.898.46 1.26.81.368.36.66.792.859 1.268.146.344.242.708.285 1.08l-9.635.008A4.714 4.714 0 0 0 0 12.457a6.493 6.493 0 0 0 .345 2.127 4.927 4.927 0 0 0 1.08 1.783c.528.56 1.17 1 1.88 1.293a6.454 6.454 0 0 0 2.504.457c.824.005 1.64-.15 2.404-.457a5.986 5.986 0 0 0 1.964-1.277 6.116 6.116 0 0 0 1.686-3.076h.273a6.13 6.13 0 0 0 1.686 3.077 5.99 5.99 0 0 0 1.964 1.276 6.345 6.345 0 0 0 2.405.457 6.45 6.45 0 0 0 2.502-.457 5.42 5.42 0 0 0 1.882-1.293 4.928 4.928 0 0 0 1.08-1.783A6.52 6.52 0 0 0 24 12.457a4.757 4.757 0 0 0-.039-.554z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>GeeksforGeeks</h4>
+                            <span class="platform-handle">@priyanshusnmxz</span>
+                        </div>
+                    </div>
+                    <div class="live-badge"><span class="pulse-dot"></span> Live Sync</div>
+                </div>
+                <div class="coding-card-body">
+                    <div class="main-count">
+                        <span class="count-val" id="gfg-total">160+</span>
+                        <span class="count-label">Problems Solved</span>
+                    </div>
+                    <div class="difficulty-pills">
+                        <div class="pill school">
+                            <span class="pill-label">School</span>
+                            <span class="pill-val" id="gfg-school">45</span>
+                        </div>
+                        <div class="pill easy">
+                            <span class="pill-label">Easy</span>
+                            <span class="pill-val" id="gfg-easy">65</span>
+                        </div>
+                        <div class="pill medium">
+                            <span class="pill-label">Medium</span>
+                            <span class="pill-val" id="gfg-medium">50</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.geeksforgeeks.org/profile/priyanshusnmxz?tab=activity" target="_blank" rel="noopener noreferrer" class="coding-card-btn">
+                    <span>View GFG Profile</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -2055,6 +2377,58 @@
             });
         }, { threshold: 0.5 });
         statEls.forEach(el => statIO.observe(el));
+
+        // Live Coding Platform Counters (LeetCode & GFG)
+        async function syncCodingStats() {
+            let leetcodeSolved = 419;
+            let gfgSolved = 160;
+
+            // Fetch live LeetCode stats
+            try {
+                const lcRes = await fetch("https://alfa-leetcode-api.onrender.com/userProfile/S1JTnEKhOf");
+                if (lcRes.ok) {
+                    const lcData = await lcRes.json();
+                    if (lcData && lcData.totalSolved) {
+                        leetcodeSolved = lcData.totalSolved;
+                        const lcTotalEl = document.getElementById('leetcode-total');
+                        const lcEasyEl = document.getElementById('leetcode-easy');
+                        const lcMedEl = document.getElementById('leetcode-medium');
+                        const lcHardEl = document.getElementById('leetcode-hard');
+                        
+                        if (lcTotalEl) lcTotalEl.textContent = lcData.totalSolved;
+                        if (lcEasyEl && lcData.easySolved !== undefined) lcEasyEl.textContent = lcData.easySolved;
+                        if (lcMedEl && lcData.mediumSolved !== undefined) lcMedEl.textContent = lcData.mediumSolved;
+                        if (lcHardEl && lcData.hardSolved !== undefined) lcHardEl.textContent = lcData.hardSolved;
+                    }
+                }
+            } catch (err) {
+                console.log("LeetCode live sync fallback active.");
+            }
+
+            // Fetch live GFG stats
+            try {
+                const gfgRes = await fetch("https://geeks-for-geeks-stats-api.vercel.app/?userName=priyanshusnmxz&raw=Y");
+                if (gfgRes.ok) {
+                    const gfgData = await gfgRes.json();
+                    if (gfgData && gfgData.totalProblemsSolved) {
+                        gfgSolved = parseInt(gfgData.totalProblemsSolved, 10) || gfgSolved;
+                        const gfgTotalEl = document.getElementById('gfg-total');
+                        if (gfgTotalEl) gfgTotalEl.textContent = gfgSolved;
+                    }
+                }
+            } catch (err) {
+                console.log("GFG sync fallback active.");
+            }
+
+            // Update combined problems solved counter
+            const totalProblemsEl = document.getElementById('total-problems-count');
+            if (totalProblemsEl) {
+                const combined = leetcodeSolved + gfgSolved;
+                totalProblemsEl.dataset.target = combined;
+                totalProblemsEl.textContent = combined + "+";
+            }
+        }
+        syncCodingStats();
 
         // skill bars
         const bars = document.querySelectorAll('.bar span');
