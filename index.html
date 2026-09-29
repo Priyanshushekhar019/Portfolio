@@ -1889,21 +1889,21 @@
                 </div>
                 <div class="coding-card-body">
                     <div class="main-count">
-                        <span class="count-val" id="gfg-total">160+</span>
+                        <span class="count-val" id="gfg-total">137</span>
                         <span class="count-label">Problems Solved</span>
                     </div>
                     <div class="difficulty-pills">
                         <div class="pill school">
                             <span class="pill-label">School</span>
-                            <span class="pill-val" id="gfg-school">45</span>
+                            <span class="pill-val" id="gfg-school">38</span>
                         </div>
                         <div class="pill easy">
                             <span class="pill-label">Easy</span>
-                            <span class="pill-val" id="gfg-easy">65</span>
+                            <span class="pill-val" id="gfg-easy">58</span>
                         </div>
                         <div class="pill medium">
                             <span class="pill-label">Medium</span>
-                            <span class="pill-val" id="gfg-medium">50</span>
+                            <span class="pill-val" id="gfg-medium">41</span>
                         </div>
                     </div>
                 </div>
@@ -2381,9 +2381,9 @@
         // Live Coding Platform Counters (LeetCode & GFG)
         async function syncCodingStats() {
             let leetcodeSolved = 419;
-            let gfgSolved = 160;
+            let gfgSolved = 137; // Set your current baseline GFG count here
 
-            // Fetch live LeetCode stats
+            // Fetch live LeetCode stats (automatic real-time sync)
             try {
                 const lcRes = await fetch("https://alfa-leetcode-api.onrender.com/userProfile/S1JTnEKhOf");
                 if (lcRes.ok) {
@@ -2405,7 +2405,7 @@
                 console.log("LeetCode live sync fallback active.");
             }
 
-            // Fetch live GFG stats
+            // Fetch live GFG stats (attempts live sync, defaults to baseline if GFG blocks)
             try {
                 const gfgRes = await fetch("https://geeks-for-geeks-stats-api.vercel.app/?userName=priyanshusnmxz&raw=Y");
                 if (gfgRes.ok) {
