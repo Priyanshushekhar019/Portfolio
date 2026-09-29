@@ -1358,12 +1358,32 @@
             justify-content: center;
         }
 
-        #form-success {
+        #form-success,
+        #form-error {
             display: none;
-            color: #4ade80;
             font-size: .88rem;
             margin-top: 14px;
             text-align: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        #form-success {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+        }
+
+        #form-error {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+        }
+
+        #form-error a {
+            color: #60a5fa;
+            text-decoration: underline;
         }
 
         /* ===== footer ===== */
@@ -1941,8 +1961,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary submit-btn"><i class="fa-solid fa-paper-plane"></i> Send
                     Message</button>
-                <div id="form-success"><i class="fa-solid fa-circle-check"></i> Message sent! I'll get back to you soon.
-                </div>
+                <div id="form-success"><i class="fa-solid fa-circle-check"></i> Message sent! I'll get back to you soon.</div>
+                <div id="form-error"></div>
             </form>
         </div>
     </section>
@@ -2064,11 +2084,18 @@
             e.preventDefault();
             let valid = true;
             const name = document.getElementById('cname'), email = document.getElementById('cemail'), msg = document.getElementById('cmessage');
+            const successDiv = document.getElementById('form-success');
+            const errorDiv = document.getElementById('form-error');
+
+            successDiv.style.display = 'none';
+            errorDiv.style.display = 'none';
+
             [name, email, msg].forEach(f => f.closest('.form-group').classList.remove('invalid'));
             if (name.value.trim().length < 2) { name.closest('.form-group').classList.add('invalid'); valid = false; }
             const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRe.test(email.value.trim())) { email.closest('.form-group').classList.add('invalid'); valid = false; }
             if (msg.value.trim().length < 5) { msg.closest('.form-group').classList.add('invalid'); valid = false; }
+            
             if (valid) {
                 const btn = form.querySelector('.submit-btn');
                 const originalText = btn.innerHTML;
@@ -2084,26 +2111,31 @@
                     body: JSON.stringify({
                         name: name.value,
                         email: email.value,
-                        message: msg.value
+                        message: msg.value,
+                        _subject: `New Portfolio Message from ${name.value}`,
+                        _template: "table",
+                        _captcha: "false"
                     })
                 })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success === "true" || data.success === true) {
-                            document.getElementById('form-success').style.display = 'block';
+                            successDiv.style.display = 'block';
                             form.reset();
+                            setTimeout(() => { successDiv.style.display = 'none'; }, 6000);
                         } else {
-                            alert("Failed to send message: " + data.message);
+                            errorDiv.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${data.message || "Failed to send message."} You can also email me directly at <a href="mailto:priyanshushekhar019@gmail.com">priyanshushekhar019@gmail.com</a>`;
+                            errorDiv.style.display = 'block';
                         }
                     })
                     .catch(err => {
                         console.error(err);
-                        alert("Something went wrong. Please try again.");
+                        errorDiv.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Unable to reach submission service. Please email me directly at <a href="mailto:priyanshushekhar019@gmail.com">priyanshushekhar019@gmail.com</a>`;
+                        errorDiv.style.display = 'block';
                     })
                     .finally(() => {
                         btn.innerHTML = originalText;
                         btn.disabled = false;
-                        setTimeout(() => document.getElementById('form-success').style.display = 'none', 5000);
                     });
             }
         });
